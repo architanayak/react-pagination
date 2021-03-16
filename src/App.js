@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   const [postsPerPage] = useState(5);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(1);
   const [posts, setAllPosts] = useState([]);
   const [pageCount, setPageCount] = useState(0)
 
@@ -23,8 +23,7 @@ function App() {
   const getAllPosts = async () => {
     const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`)
     const data = res.data;
-    const slice = data.slice(offset, offset + postsPerPage)
-
+    const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
     // For displaying Data 
     const postData = getPostData(slice)
 
@@ -44,7 +43,7 @@ function App() {
 
   return (
     <div className="main-app">
-      
+
       {/* Display all the posts */}
       {posts}
 
